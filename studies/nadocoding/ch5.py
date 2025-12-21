@@ -25,12 +25,13 @@
 subway = ["푸", "피글렛", "티거"]
 # print(type(subway))
 # print(subway)
-print(subway.index("피글렛"))
+# print(subway.index("피글렛"))
 
 subway.append("이요르")
 # print(subway)
 
-subway.insert(1, "루")
+# subway.insert(1, "루")
+subway.insert(subway.index("피글렛"), "루")
 print(subway)
 
 print(subway.pop())
