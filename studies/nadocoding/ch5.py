@@ -128,3 +128,11 @@
 """
         5.2.2 값 변경/추가/삭제하기
 """
+cabinet = {"A-3": "푸", "B-100": "피글렛"}
+print(cabinet, "\n", type(cabinet))
+cabinet["A-3"] = "티거"
+cabinet["C-20"] = "이요르"
+print(cabinet)      
+
+del cabinet["A-3"]
+print(cabinet)
