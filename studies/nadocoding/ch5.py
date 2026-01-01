@@ -128,11 +128,59 @@
 """
         5.2.2 값 변경/추가/삭제하기
 """
-cabinet = {"A-3": "푸", "B-100": "피글렛"}
-print(cabinet, "\n", type(cabinet))
-cabinet["A-3"] = "티거"
-cabinet["C-20"] = "이요르"
-print(cabinet)      
+# cabinet = {"A-3": "푸", "B-100": "피글렛"}
+# print(cabinet, "\n", type(cabinet))
+# cabinet["A-3"] = "티거"
+# cabinet["C-20"] = "이요르"
+# print(cabinet)      
 
-del cabinet["A-3"]
-print(cabinet)
+# del cabinet["A-3"]
+# print(cabinet)
+
+"""
+        5.2.3 값 확인하기
+"""
+# print(cabinet.keys())
+# print(cabinet.values())
+# print(cabinet.items())
+
+# cabinet.clear()
+# print(cabinet)
+
+"""
+    5.3 튜플
+"""
+# menu = ("돈가스", "치즈돈가스")
+# print(menu[0])
+# print(menu[1])
+# print(menu[-2:])
+
+# name = "피글렛"
+# age = 20
+# hobby = "코딩"
+
+# (name, age, hobby) = ("피글렛", 20, "코딩")
+# print(name, age, hobby)
+
+# (departure, arrival) = ("김포", "제주")
+# print(f"{departure} > {arrival}")
+# (departure, arrival) =(arrival, departure)
+# print(f"{departure} > {arrival}")
+
+"""
+    5.4 세트
+"""
+# my_set = {1, 2, 3, 3, 3}
+# print(my_set)
+
+# java = {"푸", "피글렛", "티거"}
+# python = set(["푸", "이요르"])
+# print(java, python)
+
+# empty_set = set()
+# print(empty_set, type(empty_set))
+
+"""
+        5.6 실습문제
+"""
+from random import shuffle, sample
