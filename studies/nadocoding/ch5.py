@@ -179,8 +179,59 @@
 
 # empty_set = set()
 # print(empty_set, type(empty_set))
+# print(java.intersection(python))
+# print(java & python)
+
+# print(java | python)
+# print(java.union(python))
+
+# print(java - python)
+# print(java.difference(python))
+
+# print(python - java)
+# print(python.difference(java))
+
+# python.add("피글렛")
+# print(python)
+
+# java.remove("피글렛")
+# print(java)
 
 """
-        5.6 실습문제
+    5.5 자료구조 변환하기
 """
-from random import shuffle, sample
+# menu = {"커피", "우유", "주스"}
+# print(menu, type(menu))
+
+# menu = list(menu)
+# print(menu, type(menu))
+
+# menu = tuple(menu)
+# print(menu, type(menu))
+
+# menu = set(menu)
+# print(menu, type(menu))
+
+"""
+    5.6 실습문제
+"""
+# from random import shuffle, sample
+
+# users = range(1, 21)
+# users = list(users)
+
+# shuffle(users)
+# winners = sample(users, 4)
+
+# print("-- 당첨자 발표 --")
+# print(f"치킨 당첨자 : {winners[0]}")
+# print(f"커피 당첨자 : {winners[1:]}")
+# print("-- 축하합니다! --")
+
+"""
+    마무리
+"""
+subjects = ["자료구조", "알고리즘", "자료구조", "운영체계"]
+subjects = set(subjects)
+subjects = list(subjects)
+print(f"신청한 과목은 다음과 같습니다.\n{subjects}")
