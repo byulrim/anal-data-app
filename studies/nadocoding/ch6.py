@@ -62,11 +62,18 @@
 #     if index == 0:
 #         print("커피를 폐기 처분합니다.")
 
-customer = "아이언맨"
-index = 1
+# customer = "아이언맨"
+# index = 1
 
-while True:
-    print("{0} 님, 커피가 준비됐습니다. 호출 {1}회".format(customer, index))
-    index += 1
+# while True:
+#     print("{0} 님, 커피가 준비됐습니다. 호출 {1}회".format(customer, index))
+#     index += 1
+
+customer = "토르"
+person = None
+
+while person != customer:
+    print(f"{customer} 님, 커피가 준비됐습니다.")
+    person = input("이름이 어떻게 되세요? ")
 
 
