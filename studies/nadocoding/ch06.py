@@ -119,7 +119,7 @@
 # total_count = 0
 
 # for customer in range(1, 51):
-#     time = randrange(5, 51)
+    # time = randrange(5, 51)
 #     if 5 <= time <= 15:
 #         matched = "0"
 #         total_count += 1
