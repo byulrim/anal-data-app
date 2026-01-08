@@ -122,3 +122,66 @@
 """
     8.5 데이터를 파일로 저장하기: pickle 모듈
 """
+# import pickle
+
+# profile_file = open("profile.pickle", "wb")
+# profile = {"이름": "스누피", "나이": 30, "취미": ["축구", "골프", "코딩"]}
+# print(profile, type(profile))
+
+# pickle.dump(profile, profile_file)
+# profile_file.close()
+
+# profile_file = open("profile.pickle", "rb")
+# profile = pickle.load(profile_file)
+
+# print(profile, type(profile))
+# profile_file.close()
+
+"""
+    8.6 파일 한 번에 열고 닫기: with 문
+"""
+# import pickle
+
+# # with open("profile.pickle", "rb") as profile_file:
+# #     print(pickle.load(profile_file))
+
+# with open("study.txt", "w", encoding="utf-8") as study_file:
+#     study_file.write("파이썬을 열심히 공부하고 있어요.")
+
+# with open("study.txt", "r", encoding="utf-8") as study_file:
+#     print(study_file.read())
+
+"""
+    8.7 실습 문제: 보고서 파일 만들기
+"""
+# for weekly in range(1, 51):
+#     with open(str(weekly)+"주차.txt", "w", encoding="utf-8") as weekly_templete:
+#         weekly_templete.write(f"# {weekly}주차.txt 파일 내용\n")
+#         weekly_templete.write(f"- {weekly}주차 주간보고 -\n")
+#         weekly_templete.write("부서 : \n")
+#         weekly_templete.write("이름 : \n")
+#         weekly_templete.write("업무 요약 : ")
+
+# for weekly in range(1, 51):
+#     with open(str(weekly)+"주차.txt", "r", encoding="utf-8") as weekly_templete:
+#         for line in weekly_templete.readlines():
+#             if not line:
+#                 break
+#             print(f"{line}", end="")
+#         print(end="\n\n")
+
+"""
+    마무리
+"""
+with open("class.txt", "tw", encoding="utf-8") as class_file:
+    class_file.write("초록반 5세 20명 파랑반 5세 18명 노랑반 7세 20명")
+
+with open("class.txt", "tr", encoding="utf-8") as class_file:
+    classes = class_file.read()
+
+    for i in classes.split():
+        if i.endswith("명"):
+            print(i)
+        else:
+            print(i, end=" ")
+
