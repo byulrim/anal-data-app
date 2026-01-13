@@ -102,14 +102,25 @@
 """
         9.3.1 상속이란
 """
+# class Unit:
+#     def __init__(self, name: str, hp: int) -> None:
+#         self.name = name
+#         self.hp = hp
 class Unit:
-    def __init__(self, name: str, hp: int):
+    def __init__(self, name: str, hp: int, speed: int) -> None:
         self.name = name
         self.hp = hp
-
+        self.speed = speed
+    
+    def move(self, location: str) -> None:
+        print("[지상 유닛 이동]")
+        print("{0} : {1} 방향으로 이동합니다. [속도 {2}]" \
+              .format(self.name, location, self.speed))
 class AttackUnit(Unit):
-    def __init__(self, name: str, hp: int, damage: int):
-        Unit.__init__(self, name, hp)
+    # def __init__(self, damage, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    def __init__(self, name: str, hp: int, damage: int, speed: int) -> None:        
+        Unit.__init__(self, name, hp, speed)
         self.damage = damage
 
     def attack(self, location: str) -> None:
@@ -123,12 +134,61 @@ class AttackUnit(Unit):
         if self.hp <= 0:
             print(f"{self.name} : 파괴됐습니다.")
 
-flameThrower1 = AttackUnit("화염방사병", 50, 16)
-flameThrower1.attack("5시")
+# flameThrower1 = AttackUnit("화염방사병", 50, 16, 1)
+# flameThrower1.attack("5시")
 
-flameThrower1.damaged(25)
-flameThrower1.damaged(25)
+# flameThrower1.damaged(25)
+# flameThrower1.damaged(25)
 
 """
         9.3.2 다중 상속
 """
+class Flyable:
+    def __init__(self, flying_speed: int) -> None:
+        self.flying_speed = flying_speed
+
+    def fly(self, name: str, location: str) -> None:
+        print("{0} : {1} 방향으로 날아갑니다. [속도 {2}]" \
+              .format(name, location, self.flying_speed))
+        
+class FlyableAttackUnit(AttackUnit, Flyable):
+    def __init__(self, name: str, hp: int, damage: int, flying_speed: int) -> None:
+        AttackUnit.__init__(self, name, hp, damage, 0)
+        Flyable.__init__(self, flying_speed)
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    def move(self, location):
+        print("[공중 유닛 이동]")
+        self.fly(self.name, location)
+
+# interceptor = FlyableAttackUnit("요격기", 200, 6, 5)
+# interceptor.fly(interceptor.name, "3시")
+
+"""
+        9.3.3 메서드 오버라이딩
+"""        
+# hoverbike = AttackUnit("호버 바이크", 80, 20, 10)
+# hoverbike.move("11시")
+
+# spacecruiser = FlyableAttackUnit("우주 순양함", 500, 25, 3)
+# spacecruiser.move("9시")
+
+"""
+    9.4 동작 없이 일단 넘어가기: pass
+    ("인덴테이션(indentation)이 필요한 곳에서는 모두 사용 가능"하다고 젬미니가 알려줬음)
+"""
+class BuildingUnit(Unit):
+    def __init__(self, name, hp, location):
+        pass
+
+supply_depot = BuildingUnit("보급고", 500, "7시")
+# print(supply_depot.name)
+
+def game_start():
+    print("[알림] 새로운 게임을 시작합니다.")
+
+def game_over():
+    pass
+
+game_start()
+game_over()
