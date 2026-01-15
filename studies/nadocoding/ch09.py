@@ -179,7 +179,8 @@ class FlyableAttackUnit(AttackUnit, Flyable):
 """
 class BuildingUnit(Unit):
     def __init__(self, name, hp, location):
-        pass
+        Unit.__init__(self, name, hp, 0)
+        self.location = location
 
 supply_depot = BuildingUnit("보급고", 500, "7시")
 # print(supply_depot.name)
@@ -192,3 +193,13 @@ def game_over():
 
 game_start()
 game_over()
+
+"""
+    9.5 부모 클래스 호출하기: super( )
+"""
+print([i if i % 4 == 0 else -i for i in range(11) if i % 2 == 0])
+
+for i in range(5): print(i); print(i + 1)
+
+for i in range(10):
+    print(i)
