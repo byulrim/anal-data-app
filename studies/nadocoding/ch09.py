@@ -111,21 +111,11 @@ class Unit:
         self.name = name
         self.hp = hp
         self.speed = speed
+        print(f"{self.name} 유닛을 생성했습니다.")
     
     def move(self, location: str) -> None:
-        print("[지상 유닛 이동]")
-        print("{0} : {1} 방향으로 이동합니다. [속도 {2}]" \
-              .format(self.name, location, self.speed))
-class AttackUnit(Unit):
-    # def __init__(self, damage, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    def __init__(self, name: str, hp: int, damage: int, speed: int) -> None:        
-        Unit.__init__(self, name, hp, speed)
-        self.damage = damage
-
-    def attack(self, location: str) -> None:
-        print("{} : {} 방향 적군을 공격합니다. [공격력 {}]" \
-              .format(self.name, location, self.damage))
+        # print("[지상 유닛 이동]")
+        print(f"{self.name} : {location} 방향으로 이동합니다. [속도 {self.speed}]")
 
     def damaged(self, damage: int) -> None:
         print(f"{self.name} : {damage}만큼 피해를 입었습니다.")
@@ -133,6 +123,15 @@ class AttackUnit(Unit):
         print(f"{self.name} : 현재 체력은 {self.hp}입니다.")
         if self.hp <= 0:
             print(f"{self.name} : 파괴됐습니다.")
+
+class AttackUnit(Unit):
+    def __init__(self, name: str, hp: int, damage: int, speed: int) -> None:        
+        super().__init__(name, hp, speed)
+        self.damage = damage
+
+    def attack(self, location: str) -> None:
+        print(f"{self.name} : {location} 방향 적군을 공격합니다. [공격력 {self.damage}]")
+
 
 # flameThrower1 = AttackUnit("화염방사병", 50, 16, 1)
 # flameThrower1.attack("5시")
@@ -159,7 +158,7 @@ class FlyableAttackUnit(AttackUnit, Flyable):
     #     super().__init__(*args, **kwargs)
     def move(self, location):
         print("[공중 유닛 이동]")
-        self.fly(self.name, location)
+        super().fly(self.name, location)
 
 # interceptor = FlyableAttackUnit("요격기", 200, 6, 5)
 # interceptor.fly(interceptor.name, "3시")
@@ -167,11 +166,11 @@ class FlyableAttackUnit(AttackUnit, Flyable):
 """
         9.3.3 메서드 오버라이딩
 """        
-# hoverbike = AttackUnit("호버 바이크", 80, 20, 10)
-# hoverbike.move("11시")
+hoverbike = AttackUnit("호버 바이크", 80, 20, 10)
+hoverbike.move("11시")
 
-# spacecruiser = FlyableAttackUnit("우주 순양함", 500, 25, 3)
-# spacecruiser.move("9시")
+spacecruiser = FlyableAttackUnit("우주 순양함", 500, 25, 3)
+spacecruiser.move("9시")
 
 """
     9.4 동작 없이 일단 넘어가기: pass
@@ -179,11 +178,12 @@ class FlyableAttackUnit(AttackUnit, Flyable):
 """
 class BuildingUnit(Unit):
     def __init__(self, name, hp, location):
-        Unit.__init__(self, name, hp, 0)
+        # Unit.__init__(self, name, hp, 0)
+        super().__init__(name, hp, 0)
         self.location = location
 
 supply_depot = BuildingUnit("보급고", 500, "7시")
-# print(supply_depot.name)
+print(supply_depot.name, supply_depot.hp, supply_depot.location)
 
 def game_start():
     print("[알림] 새로운 게임을 시작합니다.")
@@ -197,9 +197,19 @@ game_over()
 """
     9.5 부모 클래스 호출하기: super( )
 """
-print([i if i % 4 == 0 else -i for i in range(11) if i % 2 == 0])
+# super.py 파일 참조
 
-for i in range(5): print(i); print(i + 1)
+"""
+    9.6 게임 완성
+"""
+class Soldier(AttackUnit):
+    def __init__(self):
+        super().__init__("보병", 40, 5, 1)
 
-for i in range(10):
-    print(i)
+    def booster(self):
+        if self.hp > 10:
+            self.hp -= 10
+            print(f"{self.name} : 강화제를 사용합니다.")
+        else:
+            print(f"{self.name} : 체력이 부족해 강화제를 사용할 수 없습니다.")
+
