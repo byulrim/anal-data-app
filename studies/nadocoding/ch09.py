@@ -176,20 +176,21 @@ class FlyableAttackUnit(AttackUnit, Flyable):
     9.4 동작 없이 일단 넘어가기: pass
     ("인덴테이션(indentation)이 필요한 곳에서는 모두 사용 가능"하다고 젬미니가 알려줬음)
 """
-class BuildingUnit(Unit):
-    def __init__(self, name, hp, location):
-        # Unit.__init__(self, name, hp, 0)
-        super().__init__(name, hp, 0)
-        self.location = location
+# class BuildingUnit(Unit):
+#     def __init__(self, name, hp, location):
+#         # Unit.__init__(self, name, hp, 0)
+#         super().__init__(name, hp, 0)
+#         self.location = location
 
 # supply_depot = BuildingUnit("보급고", 500, "7시")
 # print(supply_depot.name, supply_depot.hp, supply_depot.location)
 
-# def game_start():
-#     print("[알림] 새로운 게임을 시작합니다.")
+def game_start():
+    print("[알림] 새로운 게임을 시작합니다.")
 
-# def game_over():
-#     pass
+def game_over():
+    print("Player : Good Game")
+    print("[Player] 님이 게임에서 퇴장했습니다.")
 
 # game_start()
 # game_over()
@@ -202,6 +203,9 @@ class BuildingUnit(Unit):
 """
     9.6 게임 완성
 """
+""" 
+        9.6.1 게임 준비하기
+"""
 class Soldier(AttackUnit):
     def __init__(self):
         super().__init__("보병", 40, 5, 1)
@@ -209,7 +213,7 @@ class Soldier(AttackUnit):
     def booster(self):
         if self.hp > 10:
             self.hp -= 10
-            print(f"{self.name} : 강화제를 사용합니다.")
+            print(f"{self.name} : 강화제를 사용합니다. (HP 10 감소)")
         else:
             print(f"{self.name} : 체력이 부족해 강화제를 사용할 수 없습니다.")
 
@@ -244,3 +248,99 @@ class Stealth(FlyableAttackUnit):
         else:
             print(f"{self.name} : 은폐 모드를 설정합니다.")
             self.cloaked = True
+
+""" 
+        9.6.2 게임 실행하기
+"""
+game_start()
+
+so1 = Soldier()
+so2 = Soldier()
+so3 = Soldier()
+
+ta1 = Tank()
+ta2 = Tank()
+
+st1 = Stealth()
+
+attack_units = []
+attack_units.append(so1)
+attack_units.append(so2)
+attack_units.append(so3)
+attack_units.append(ta1)
+attack_units.append(ta2)
+attack_units.append(st1)
+
+for unit in attack_units:
+    unit.move("1시")
+
+Tank.siege_developed = True
+print("[알림] 탱크의 시지 모드 개발이 완료됐습니다.")
+
+for unit in attack_units:
+    if isinstance(unit, Soldier):
+        unit.booster()
+    elif isinstance(unit, Tank):
+        unit.set_siege_mode()
+    elif isinstance(unit, Stealth):
+        unit.cloaking()
+
+from random import randint
+
+for unit in attack_units:
+    unit.attack("1시")
+
+for unit in attack_units:
+    unit.damaged(randint(5, 20))
+
+game_over()
+
+""" 
+    9.8 실습 문제: 부동산 프로그램 만들기
+"""
+class House:
+    
+    def __init__(self, location: str, house_type: str, deal_type: str, price: str, completion_year: str) -> None:
+        self.locattion = location
+        self.house_type = house_type
+        self.deal_type = deal_type
+        self.price = price
+        self.completion_year = completion_year
+
+    def show_detail(self) -> None:
+        print(f"{self.locattion} {self.house_type} {self.deal_type} {self.price} {self.completion_year}")
+
+houses = []
+house1 = House("강남", "아파트", "매매", "10억 원", "2010년")
+house2 = House("마포", "오피스텔", "전세", "5억 원", "2007년")
+house3 = House("송파", "빌라", "월세", "500/50만 원", "2000년")
+
+for i in range(1, 4):
+    houses.append(eval("house" + str(i)))
+
+print(f"총 {len(houses)}가지 매물이 있습니다.")
+for house in houses:
+    house.show_detail()
+
+"""
+    마무리
+"""
+class ParkingManager:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.count = 0
+        print(f"총 {self.capacity}대를 등록할 수 있습니다.")
+
+    def register(self):
+        if self.count >= self.capacity:
+            print("더 이상 등록할 수 없습니다.")
+            return
+        # else:
+        self.count += 1
+        print(f"차량 신규 등록 ({self.count}/{self.capacity})")
+
+manager = ParkingManager(5)
+for i in range(6):
+    print(f"{i + 1: >5}:", end = " ")
+    manager.register()
+    
