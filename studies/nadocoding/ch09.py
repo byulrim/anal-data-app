@@ -157,7 +157,7 @@ class FlyableAttackUnit(AttackUnit, Flyable):
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
     def move(self, location):
-        print("[공중 유닛 이동]")
+        # print("[공중 유닛 이동]")
         super().fly(self.name, location)
 
 # interceptor = FlyableAttackUnit("요격기", 200, 6, 5)
@@ -166,11 +166,11 @@ class FlyableAttackUnit(AttackUnit, Flyable):
 """
         9.3.3 메서드 오버라이딩
 """        
-hoverbike = AttackUnit("호버 바이크", 80, 20, 10)
-hoverbike.move("11시")
+# hoverbike = AttackUnit("호버 바이크", 80, 20, 10)
+# hoverbike.move("11시")
 
-spacecruiser = FlyableAttackUnit("우주 순양함", 500, 25, 3)
-spacecruiser.move("9시")
+# spacecruiser = FlyableAttackUnit("우주 순양함", 500, 25, 3)
+# spacecruiser.move("9시")
 
 """
     9.4 동작 없이 일단 넘어가기: pass
@@ -182,17 +182,17 @@ class BuildingUnit(Unit):
         super().__init__(name, hp, 0)
         self.location = location
 
-supply_depot = BuildingUnit("보급고", 500, "7시")
-print(supply_depot.name, supply_depot.hp, supply_depot.location)
+# supply_depot = BuildingUnit("보급고", 500, "7시")
+# print(supply_depot.name, supply_depot.hp, supply_depot.location)
 
-def game_start():
-    print("[알림] 새로운 게임을 시작합니다.")
+# def game_start():
+#     print("[알림] 새로운 게임을 시작합니다.")
 
-def game_over():
-    pass
+# def game_over():
+#     pass
 
-game_start()
-game_over()
+# game_start()
+# game_over()
 
 """
     9.5 부모 클래스 호출하기: super( )
@@ -213,3 +213,34 @@ class Soldier(AttackUnit):
         else:
             print(f"{self.name} : 체력이 부족해 강화제를 사용할 수 없습니다.")
 
+class Tank(AttackUnit):
+    siege_developed = False
+
+    def __init__(self):
+        super().__init__("탱크", 150, 35, 1)
+        self.siege_mode = False
+
+    def set_siege_mode(self):
+        if Tank.siege_developed == False:
+            return
+        if self.siege_mode == False:
+            print(f"{self.name} : 시지 모드로 전환합니다.")
+            self.damage *= 2
+            self.siege_mode = True
+        else:
+            print(f"{self.name} : 시지 모드를 해제합니다.")
+            self.damage /= 2
+            self.siege_mode = False
+
+class Stealth(FlyableAttackUnit):
+    def __init__(self):
+        super().__init__("전투기", 80, 20, 5)
+        self.cloaked = False
+
+    def cloaking(self):
+        if self.cloaked == True:
+            print(f"{self.name} : 은폐 모드를 해제합니다.")
+            self.cloaked = False
+        else:
+            print(f"{self.name} : 은폐 모드를 설정합니다.")
+            self.cloaked = True
