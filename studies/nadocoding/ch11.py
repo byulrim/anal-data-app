@@ -147,6 +147,30 @@
 """
         11.8.3 시간 관련 모듈
 """
-import time
+# import time
 
-print(time.localtime())
+# print(time.localtime())
+# print(time.strftime("%Y-%m-%d %H:%M:%S"))
+
+# import datetime
+
+# print("오늘 날짜는", datetime.date.today())
+
+# # for lst in dir(datetime.datetime):
+# #     print(lst)
+
+# today = datetime.date.today()
+# delta = datetime.timedelta(days=100)
+# print(delta)
+# print(f"우리가 만난 지 100일째 되는 날은 {today + delta}일")
+
+"""
+    11.9 실습 문제: 나만의 모듈 만들기
+"""
+import byme
+
+byme.sign()
+
+"""
+    마무리
+"""
